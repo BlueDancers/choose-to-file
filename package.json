@@ -1,16 +1,17 @@
 {
   "name": "choose-to-file",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "main": "./dist/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "tsc"
   },
   "author": "wu.vkcyan@gmail.com",
   "description": "Web side functional upload file",
   "bugs": {
-    "url": "https://github.com/vkcyan/fun-upload/issues"
+    "url": "https://github.com/vkcyan/choose-to-file/issues"
   },
-  "homepage": "https://github.com/vkcyan/fun-upload#readme",
+  "homepage": "https://github.com/vkcyan/choose-to-file#readme",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.11.15"

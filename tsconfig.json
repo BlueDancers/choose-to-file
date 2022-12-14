@@ -5,7 +5,7 @@
       "es2016",
       "dom"
     ],
-    "module": "CommonJS",
+    "module": "ES6",
     "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

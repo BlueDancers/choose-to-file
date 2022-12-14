@@ -1,13 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-let defaultFastUpload = {
+const chooseToFile = (params = {
     multiple: true,
     accept: null,
-};
-function fastUpload(params = defaultFastUpload) {
+}) => {
     return new Promise((resolve, reject) => {
         if (document.readyState != 'complete') {
-            throw new Error('dom加载异常,请确保dom完全加载再进行使用');
+            throw new Error('dom loading exception, please ensure that the dom is fully loaded before using');
         }
         let fileCancle = true; // 当前input是否未上传了文件
         let { input } = createInput({
@@ -21,7 +18,7 @@ function fastUpload(params = defaultFastUpload) {
             setTimeout(() => {
                 if (fileCancle) {
                     removeInput(input);
-                    reject('用户取消了上传');
+                    reject('upload canceled');
                 }
             }, 500);
         }, { once: true });
@@ -33,8 +30,8 @@ function fastUpload(params = defaultFastUpload) {
             return resolve(params.multiple ? files : files[0]);
         };
     });
-}
-exports.default = fastUpload;
+};
+export { chooseToFile };
 /**
  * 创建上传用input
  * @returns
@@ -47,6 +44,7 @@ function createInput({ multiple, accept }) {
     input.style.position = 'absolute';
     input.style.top = '0';
     input.style.opacity = '0';
+    input.style.zIndex = '-9999';
     input.multiple = multiple;
     if (accept) {
         input.accept = accept;

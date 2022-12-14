@@ -1,20 +1,9 @@
-type fastUploadType = {
-  /**
-   * 是否支持多选(默认支持)
-   */
-  multiple: boolean
-  /**
-   * 上传默认支持类型(默认全部支持)
-   */
-  accept: string | null
-}
-
-let defaultFastUpload = {
-  multiple: true,
-  accept: null,
-}
-
-export default function fastUpload(params: fastUploadType = defaultFastUpload): Promise<any> {
+const chooseToFile = (
+  params = {
+    multiple: true,
+    accept: null,
+  }
+) => {
   return new Promise((resolve, reject) => {
     if (document.readyState != 'complete') {
       throw new Error('dom loading exception, please ensure that the dom is fully loaded before using')
@@ -51,6 +40,8 @@ export default function fastUpload(params: fastUploadType = defaultFastUpload): 
     }
   })
 }
+
+export { chooseToFile }
 
 /**
  * 创建上传用input
