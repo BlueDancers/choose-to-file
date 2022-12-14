@@ -1,0 +1,18 @@
+{
+  "name": "fun-upload",
+  "version": "0.0.1",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "wu.vkcyan@gmail.com",
+  "description": "Web side functional upload file",
+  "bugs": {
+    "url": "https://github.com/vkcyan/fun-upload/issues"
+  },
+  "homepage": "https://github.com/vkcyan/fun-upload#readme",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^18.11.15"
+  }
+}
