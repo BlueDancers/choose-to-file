@@ -60,11 +60,10 @@ function createInput({ multiple, accept }: { multiple: boolean; accept: string |
   if (accept) {
     input.accept = accept
   }
-  // 自动点击事件
-  var evt = document.createEvent('MouseEvents')
-  evt.initEvent('click', true, true)
-  input.dispatchEvent(evt)
   body.appendChild(input)
+  // 自动点击事件
+  var event = new MouseEvent('click')
+  input.dispatchEvent(event)
   return {
     input,
   }

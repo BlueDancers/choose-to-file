@@ -2,11 +2,9 @@
 
 ## 介绍
 
-​	通过函数直接拉起上传文件能力，使用方法与微信小程序的上传图片API`wx.chooseMedia`类似，更加编写，解耦合的在H5端实现上传文件功能。
+ 	通过函数直接拉起上传文件能力，使用方法与微信小程序的上传图片 API`wx.chooseMedia`类似，更加便捷、解耦合的在 web 端实现上传文件功能。
 
-​	采用ts进行编写，具有良好的代码提示，支持web环境所有框架（Vue2、Vue3、React）
-
-
+​	TypeScript 编写，并且具有良好的代码提示，支持 web 环境框架（Vue2、Vue3、React）
 
 ## 基本用法
 
@@ -22,16 +20,14 @@ npm i choose-to-file
 import { chooseToFile } from 'choose-to-file'
 
 async function uploadImg() {
-	try {
-		let res = await chooseToFile()
-		console.log('file' + res)
-	} catch (err) {
-		console.log(err)
-	}
+  try {
+    let res = await chooseToFile()
+    console.log('file', res)
+  } catch (err) {
+    console.log(err)
+  }
 }
 ```
-
-
 
 ## API
 
@@ -40,11 +36,8 @@ async function uploadImg() {
 | multiple | boolean | true   | 是否上传多张图片，暂时不支持具体数量校验 |
 | accept   | string  | Null   | 上传文件类型校验，默认不做校验           |
 
-
-
 ## 注：
 
-当multiple为true时，API的返回值为Array类型的File对象
+当 multiple 为 true 时，API 的返回值为 Array 类型的 File 对象
 
-当multiple为false时，API的返回值为File对象
-
+当 multiple 为 false 时，API 的返回值为 File 对象
