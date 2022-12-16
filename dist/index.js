@@ -6,29 +6,34 @@ const chooseToFile = (params = {
         if (document.readyState != 'complete') {
             throw new Error('dom loading exception, please ensure that the dom is fully loaded before using');
         }
-        let fileCancle = true; // 当前input是否未上传了文件
+        let fileCancle = true; // 是否未上传文件
         let { input } = createInput({
             multiple: params.multiple,
             accept: params.accept,
         });
-        // 取消上传文件
-        // input 没有自带cancel事件,所以监听获得焦点事件(上传文件框被拉起后,无论是直接返回,点击取消,点击确认都会触发该事件)
-        // 因为全局监听事件与input onchange callback 没有关联,所以采用异步方案
-        window.addEventListener('focus', () => {
-            setTimeout(() => {
-                if (fileCancle) {
-                    removeInput(input);
-                    reject('upload canceled');
-                }
-            }, 500);
-        }, { once: true });
-        // 上传了文件
+        // TODO  { once: true }
+        window.addEventListener('focus', focusCallback);
+        /**
+         * 上传callback
+         */
         input.onchange = (evt) => {
             fileCancle = false;
             removeInput(input);
             let { files } = evt.target;
             return resolve(params.multiple ? files : files[0]);
         };
+        /**
+         * 未上传
+         */
+        function focusCallback() {
+            setTimeout(() => {
+                if (fileCancle) {
+                    removeInput(input);
+                    window.removeEventListener('focus', focusCallback);
+                    reject('upload canceled');
+                }
+            }, 500);
+        }
     });
 };
 export { chooseToFile };
@@ -49,11 +54,10 @@ function createInput({ multiple, accept }) {
     if (accept) {
         input.accept = accept;
     }
-    // 自动点击事件
-    var evt = document.createEvent('MouseEvents');
-    evt.initEvent('click', true, true);
-    input.dispatchEvent(evt);
     body.appendChild(input);
+    // 自动点击事件
+    var event = new MouseEvent('click');
+    input.dispatchEvent(event);
     return {
         input,
     };
