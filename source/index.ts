@@ -22,7 +22,6 @@ const chooseToFile = (
      */
     input.onchange = (evt) => {
       fileCancle = false
-      removeInput(input)
       let { files } = evt.target as HTMLInputElement
       return resolve(params.multiple ? files : files![0])
     }
@@ -33,7 +32,6 @@ const chooseToFile = (
     function focusCallback() {
       setTimeout(() => {
         if (fileCancle) {
-          removeInput(input)
           window.removeEventListener('focus', focusCallback)
           reject('upload canceled')
         }
@@ -50,7 +48,6 @@ export { chooseToFile }
  */
 function createInput({ multiple, accept }: { multiple: boolean; accept: string | null }) {
   // 创建dom
-  let body = document.body
   let input = document.createElement('input')
   input.type = 'file'
   input.style.position = 'absolute'
@@ -61,19 +58,9 @@ function createInput({ multiple, accept }: { multiple: boolean; accept: string |
   if (accept) {
     input.accept = accept
   }
-  body.appendChild(input)
-  // 自动点击事件
-  var event = new MouseEvent('click')
-  input.dispatchEvent(event)
+  // 自动点击
+  input.click()
   return {
     input,
   }
-}
-
-/**
- * 删除上传用input
- */
-function removeInput(input: HTMLInputElement) {
-  var parent = input.parentElement
-  parent!.removeChild(input)
 }
